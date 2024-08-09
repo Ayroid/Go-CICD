@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TIC-TAC-TOE</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        text-align: center;
+        background-color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        width: 100%;
+      }
+
+      .div_center {
+        padding: 2rem 0 1.5rem 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .matrix_table {
+        display: grid;
+        grid-template-rows: 8rem 8rem 8rem;
+        grid-template-columns: 8rem 8rem 8rem;
+      }
+
+      .matrix_ele {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 4%;
+        background-color: bisque;
+        font-size: 5rem;
+        font-weight: bolder;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        color: chocolate;
+      }
+
+      .matrix_ele:hover {
+        cursor: pointer;
+      }
+
+      .start {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .start p {
+        font-size: 2rem;
+        font-weight: bolder;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-color: cornsilk;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 7%;
+      }
+
+      .start p:hover {
+        cursor: pointer;
+      }
+
+      .player {
+        padding: 0 1rem;
+        display: none;
+      }
+
+      .winner {
+        display: none;
+        height: 20vh;
+        text-align: center;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      #playAgain,
+      #homeBtn {
+        display: none;
+        height: 5vh;
+        background-color: #ff7f50;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+      }
+
+      #playAgain:hover,
+      #homeBtn:hover {
+        background-color: #ff6347;
+      }
+
+      @media screen and (max-width: 400px) {
+        .matrix_table {
+          grid-template-rows: 8rem 8rem 8rem;
+          grid-template-columns: 8rem 8rem 8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="div_center">
+        <div class="matrix_table" id="board">
+          <div class="matrix_ele" id="ele_1" onclick="setValue('ele_1')"></div>
+          <div class="matrix_ele" id="ele_2" onclick="setValue('ele_2')"></div>
+          <div class="matrix_ele" id="ele_3" onclick="setValue('ele_3')"></div>
+          <div class="matrix_ele" id="ele_4" onclick="setValue('ele_4')"></div>
+          <div class="matrix_ele" id="ele_5" onclick="setValue('ele_5')"></div>
+          <div class="matrix_ele" id="ele_6" onclick="setValue('ele_6')"></div>
+          <div class="matrix_ele" id="ele_7" onclick="setValue('ele_7')"></div>
+          <div class="matrix_ele" id="ele_8" onclick="setValue('ele_8')"></div>
+          <div class="matrix_ele" id="ele_9" onclick="setValue('ele_9')"></div>
+        </div>
+      </div>
+      <div class="start" onclick="startGame();">
+        <p id="start">START</p>
+      </div>
+
+      <div class="start">
+        <p class="winner" id="winner1">PLAYER1<br />WON!</p>
+        <p class="winner" id="winner2">PLAYER2<br />WON!</p>
+        <p class="winner" id="draw">DRAW!</p>
+      </div>
+
+      <div class="turn start">
+        <div class="player" id="p1">
+          <p id="play1">P1 : X</p>
+        </div>
+        <div class="player" id="p2">
+          <p id="play2">P2 : O</p>
+        </div>
+      </div>
+
+      <div class="start">
+        <p id="playAgain" onclick="replay()">RESTART</p>
+        <p id="homeBtn" onclick="goHome()">HOME</p>
+      </div>
+    </div>
+
+    <script>
+      let player1,
+        player2,
+        turn,
+        line,
+        winner = 0,
+        count = 0;
+
+      function setValue(element) {
+        const ele = document.getElementById(element);
+        if (ele.innerText === "" && player1 && player2) {
+          ele.innerText = turn === 1 ? player1 : player2;
+          turn = (turn + 1) % 2;
+          turnValue();
+          count++;
+          winnerCheck();
+          if (count === 9 && winner === 0) {
+            winner = 3;
+            winnerDeclare();
+          }
+        }
+      }
+
+      function turnValue() {
+        document.getElementById("play1").style.background =
+          turn === 1 ? "chartreuse" : "bisque";
+        document.getElementById("play2").style.background =
+          turn === 1 ? "bisque" : "chartreuse";
+      }
+
+      function startGame() {
+        document.getElementById("start").style.display = "none";
+        document.getElementById("playAgain").style.display = "flex";
+        document.getElementById("homeBtn").style.display = "flex";
+        document.getElementById("p1").style.display = "block";
+        document.getElementById("p2").style.display = "block";
+
+        if (Math.random() < 0.5) {
+          player1 = "X";
+          player2 = "O";
+          turn = 1;
+        } else {
+          player1 = "O";
+          player2 = "X";
+          turn = 0;
+        }
+
+        document.getElementById("play1").innerText = `P1 : ${player1}`;
+        document.getElementById("play2").innerText = `P2 : ${player2}`;
+        turnValue();
+      }
+
+      function winnerCheck() {
+        const combinations = [
+          ["ele_1", "ele_2", "ele_3"],
+          ["ele_4", "ele_5", "ele_6"],
+          ["ele_7", "ele_8", "ele_9"],
+          ["ele_1", "ele_4", "ele_7"],
+          ["ele_2", "ele_5", "ele_8"],
+          ["ele_3", "ele_6", "ele_9"],
+          ["ele_1", "ele_5", "ele_9"],
+          ["ele_3", "ele_5", "ele_7"],
+        ];
+
+        combinations.forEach((combo) => {
+          const [a, b, c] = combo.map(
+            (id) => document.getElementById(id).innerText
+          );
+          if (a && a === b && b === c) {
+            winner = player1 === a ? 1 : 2;
+            winnerDeclare();
+          }
+        });
+      }
+
+      function winnerDeclare() {
+        document.getElementById("board").style.display = "none";
+        document.getElementById(`winner${winner}`).style.display = "flex";
+        document.getElementById("play1").style.background = "bisque";
+        document.getElementById("play2").style.background = "bisque";
+      }
+
+      function replay() {
+        window.location.reload();
+      }
+
+      function goHome() {
+        window.location.href = "index.html";
+      }
+    </script>
+  </body>
+</html>

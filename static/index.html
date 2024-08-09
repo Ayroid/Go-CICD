@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic-Tac-Toe Home</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        text-align: center;
+        background-color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        color: #333;
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        color: #666;
+      }
+
+      .btn {
+        background-color: #ff7f50;
+        color: white;
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #ff6347;
+      }
+
+      .footer {
+        margin-top: 2rem;
+        font-size: 0.9rem;
+        color: #888;
+      }
+
+      .footer a {
+        color: #ff7f50;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 0 0.5rem;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        Welcome to <br />
+        Tic-Tac-Toe
+      </h1>
+      <p>Challenge your friends or test your skills against the computer.</p>
+      <a href="tictactoe"><button class="btn">Start Game</button></a>
+
+      <div class="footer">
+        <p>
+          <a href="about">About</a>
+          <a href="contact">Contact</a>
+        </p>
+        <p style="text-align: center">
+          Created by <br />
+          <strong>Ayush Singh Kushwah</strong>
+        </p>
+      </div>
+    </div>
+
+    <script>
+      function startGame() {
+        window.location.href = "tictactoe.html";
+      }
+    </script>
+  </body>
+</html>
