@@ -1,6 +1,6 @@
-# Go Web Application
+# Go Web Tic Tac Toe
 
-This is a simple web application written in Go (Golang) using the `net/http` package to handle HTTP requests.
+This is a simple web tic-tac-toe written in Go (Golang) using the `net/http` package to handle HTTP requests.
 
 ## Running the Server
 
